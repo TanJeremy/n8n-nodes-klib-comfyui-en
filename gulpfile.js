@@ -1,16 +1,24 @@
-const path = require('path');
-const { task, src, dest } = require('gulp');
+const gulp = require('gulp');
+const svgmin = require('gulp-svgmin');
+const rename = require('gulp-rename');
 
-task('build:icons', copyIcons);
-
-function copyIcons() {
-	const nodeSource = path.resolve('nodes', '**', '*.{png,svg}');
-	const nodeDestination = path.resolve('dist', 'nodes');
-
-	src(nodeSource).pipe(dest(nodeDestination));
-
-	const credSource = path.resolve('credentials', '**', '*.{png,svg}');
-	const credDestination = path.resolve('dist', 'credentials');
-
-	return src(credSource).pipe(dest(credDestination));
-}
+gulp.task('build:icons', () => {
+  return gulp
+    .src('nodes/**/*.svg')
+    .pipe(
+      svgmin({
+        plugins: [
+          {
+            removeViewBox: false,
+          },
+        ],
+      }),
+    )
+    .pipe(
+      rename((path) => {
+        path.basename = path.basename.replace('icon', '');
+        return path;
+      }),
+    )
+    .pipe(gulp.dest('dist/nodes'));
+}); 
