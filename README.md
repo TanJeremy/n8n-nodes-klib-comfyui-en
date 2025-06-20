@@ -1,14 +1,14 @@
 # n8n-nodes-klib-comfyui
 
-这是一个用于n8n的ComfyUI节点集合，允许您在n8n工作流中与ComfyUI服务器进行交互。
+This is a ComfyUI node collection for n8n that allows you to interact with ComfyUI servers in n8n workflows.
 
-## 功能特点
+## Features
 
-这个节点包提供了以下功能：
+This node package provides the following functionality:
 
-1. **ComfyUI 触发器**：监听ComfyUI WebSocket事件，当特定事件发生时触发工作流
-4. **ComfyUI 模型管理**：获取可用模型、采样器、调度器等资源列表
-7. **ComfyUI 系统控制**：管理队列、中断执行、清理历史记录等
+1. **ComfyUI Trigger**: Listen to ComfyUI WebSocket events and trigger workflows when specific events occur
+4. **ComfyUI Model Management**: Get available models, samplers, schedulers, and other resource lists
+7. **ComfyUI System Control**: Manage queues, interrupt execution, clear history records, etc.
 
 ## Installation
 
@@ -60,32 +60,41 @@ Note: Make sure you have the correct npm registry configured and have the necess
 ```
 rm -rf dist && pnpm build && docker restart n8n && npm publish --tag latest
 ```
-## 节点说明
+## Node Descriptions
 
+### ComfyUI Trigger
 
+Listen to ComfyUI execution status and image data through WebSocket.
+**Operations**:
+- Listen to execution status: Listen to execution status of specific prompt IDs
+- Listen to image data: Listen and receive image data
 
-通过WebSocket监听ComfyUI的执行状态和图像数据�?
-**操作**�?- 监听执行状态：监听特定提示ID的执行状�?- 监听图像数据：监听并接收图像数据
+### ComfyUI Model Management
 
-### ComfyUI 模型管理
+Get available models and resources on the ComfyUI server.
+**Operations**:
+- Get all models: Get a list of all available models
+- Get specific type models: Get a list of models of specific types
+- Get sampler list: Get a list of available samplers
+- Get scheduler list: Get a list of available schedulers
+- Get extension list: Get a list of installed extensions
+- Get embedding list: Get a list of available embeddings
 
-获取ComfyUI服务器上可用的模型和资源�?
-**操作**�?- 获取所有模型：获取所有可用模型的列表
-- 获取特定类型模型：获取特定类型的模型列表
-- 获取采样器列表：获取可用的采样器列表
-- 获取调度器列表：获取可用的调度器列表
-- 获取扩展列表：获取已安装的扩展列�?- 获取嵌入向量列表：获取可用的嵌入向量列表
+### ComfyUI System Control
 
-### ComfyUI 系统控制
+Manage ComfyUI system and queue.
+**Operations**:
+- Get queue status: Get current queue status
+- Clear queue: Clear all tasks in the current queue
+- Interrupt execution: Interrupt currently executing tasks
+- Clear history: Clear all history records
+- Delete history item: Delete specific history record items
+- Get system information: Get system information
 
-管理ComfyUI系统和队列�?
-**操作**�?- 获取队列状态：获取当前队列状�?- 清空队列：清空当前队列中的所有任�?- 中断执行：中断当前正在执行的任务
-- 清空历史记录：清空所有历史记�?- 删除历史记录项：删除特定的历史记录项
-- 获取系统信息：获取系统信�?
-## 使用示例
+## Usage Examples
 
+### Example 3: Automated Model Management
 
-### 示例3：自动化模型管理
-
-1. 使用ComfyUI模型管理节点获取当前可用模型列表
-2. 使用Function节点检查是否需要更新模�?3. 如果需要更新，使用HTTP Request节点下载新模�
+1. Use ComfyUI Model Management node to get current available model list
+2. Use Function node to check if models need to be updated
+3. If update is needed, use HTTP Request node to download new models

@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-klib-comfyui",
+  "name": "n8n-nodes-klib-comfyui-en",
   "version": "1.0.11",
   "description": "n8n node for comfyui integration",
   "keywords": [
@@ -7,10 +7,10 @@
     "comfyui"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/yorkane/n8n-nodes-klib-comfyui",
+  "homepage": "https://github.com/TanJeremy/n8n-nodes-klib-comfyui-en",
   "author": {
-    "name": "yorkane",
-    "email": "whyork@qq.com"
+    "name": "TanJeremy",
+    "email": "jeremy.tan.vfx@gmail.com"
   },
   "repository": {
     "type": "git",

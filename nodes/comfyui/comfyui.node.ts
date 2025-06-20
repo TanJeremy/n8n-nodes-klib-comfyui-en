@@ -14,7 +14,7 @@ export class comfyui implements INodeType {
 		icon: 'file:comfyui.svg',
 		group: ['transform'],
 		version: 1,
-		description: '管理ComfyUI的模型资源和队列',
+		description: 'Manage ComfyUI model resources and queue',
 		defaults: {
 			name: 'ComfyUI',
 		},
@@ -28,111 +28,111 @@ export class comfyui implements INodeType {
 		],
 		properties: [
 			{
-				displayName: 'ComfyUI 服务器地址',
+				displayName: 'ComfyUI Server Address',
 				name: 'serverUrl',
 				type: 'string',
 				default: 'http://127.0.0.1:8188',
-				description: 'ComfyUI 服务器地址 (例如 http://localhost:8188 或 https://example.com)',
+				description: 'ComfyUI server address (e.g., http://localhost:8188 or https://example.com)',
 				placeholder: 'http://127.0.0.1:8188',
 				required: true,
 			},
 			{
-				displayName: '手动指定 Header Key',
+				displayName: 'Manually Specify Header Key',
 				name: 'manualHeaderKey',
 				type: 'string',
 				default: '',
-				description: '可选：手动输入认证 Header 的 Key (例如 Authorization)。如果填写，将覆盖凭证中的 Header Key。',
+				description: 'Optional: Manually enter the authentication Header Key (e.g., Authorization). If filled, it will override the Header Key in credentials.',
 				required: false,
 			},
 			{
-				displayName: '手动指定 Header Value',
+				displayName: 'Manually Specify Header Value',
 				name: 'manualHeaderValue',
 				type: 'string',
 				typeOptions: {
 					password: true,
 				},
 				default: '',
-				description: '可选：手动输入认证 Header 的 Value. 如果填写，将覆盖凭证中的 Header Value。',
+				description: 'Optional: Manually enter the authentication Header Value. If filled, it will override the Header Value in credentials.',
 				required: false,
 			},
 			{
-				displayName: '操作类别',
+				displayName: 'Operation Category',
 				name: 'operationCategory',
 				type: 'options',
 				options: [
 					{
-						name: '队列管理',
+						name: 'Queue Management',
 						value: 'queue',
-						description: '管理ComfyUI的工作流队列',
+						description: 'Manage ComfyUI workflow queue',
 					},
 					{
-						name: '模型管理',
+						name: 'Model Management',
 						value: 'models',
-						description: '获取和管理ComfyUI的模型资源',
+						description: 'Get and manage ComfyUI model resources',
 					},
 				],
 				default: 'queue',
 				required: true,
-				description: '要执行的操作类别',
+				description: 'Operation category to execute',
 			},
-			// 队列管理操作
+			// Queue management operations
 			{
-				displayName: '队列操作',
+				displayName: 'Queue Operation',
 				name: 'queueOperation',
 				type: 'options',
 				options: [
 					{
-						name: '获取最近5条历史记录',
+						name: 'Get Recent 5 History Records',
 						value: 'getRecentHistory',
-						description: '获取最近5条历史记录',
+						description: 'Get recent 5 history records',
 					},
 					{
-						name: '获取队列状态',
+						name: 'Get Queue Status',
 						value: 'getQueueStatus',
-						description: '获取当前队列状态',
+						description: 'Get current queue status',
 					},
 					{
-						name: '清空队列',
+						name: 'Clear Queue',
 						value: 'clearQueue',
-						description: '清空当前队列中的所有任务',
+						description: 'Clear all tasks in the current queue',
 					},
 					{
-						name: '中断当前执行',
+						name: 'Interrupt Current Execution',
 						value: 'interruptExecution',
-						description: '中断当前正在执行的任务',
+						description: 'Interrupt currently executing tasks',
 					},
 					{
-						name: '清空历史记录',
+						name: 'Clear History',
 						value: 'clearHistory',
-						description: '清空历史记录',
+						description: 'Clear history records',
 					},
 					{
-						name: '删除历史记录项',
+						name: 'Delete History Item',
 						value: 'deleteHistoryItem',
-						description: '删除特定的历史记录项',
+						description: 'Delete specific history record items',
 					},
 					{
-						name: '获取系统信息',
+						name: 'Get System Information',
 						value: 'getSystemInfo',
-						description: '获取ComfyUI系统信息',
+						description: 'Get ComfyUI system information',
 					},
 				],
 				default: 'getQueueStatus',
 				required: true,
-				description: '要执行的队列操作',
+				description: 'Queue operation to execute',
 				displayOptions: {
 					show: {
 						operationCategory: ['queue'],
 					},
 				},
 			},
-			// 删除历史记录项参数
+			// Delete history item parameters
 			{
 				displayName: 'Prompt ID',
 				name: 'promptId',
 				type: 'string',
 				default: '',
-				description: '要删除的历史记录项的Prompt ID',
+				description: 'Prompt ID of the history record item to delete',
 				displayOptions: {
 					show: {
 						operationCategory: ['queue'],
@@ -141,107 +141,107 @@ export class comfyui implements INodeType {
 				},
 				required: true,
 			},
-			// 模型管理操作
+			// Model management operations
 			{
-				displayName: '模型操作',
+				displayName: 'Model Operation',
 				name: 'modelsOperation',
 				type: 'options',
 				options: [
 					{
-						name: '获取所有模型',
+						name: 'Get All Models',
 						value: 'getAllModels',
-						description: '获取所有可用模型的列表',
+						description: 'Get a list of all available models',
 					},
 					{
-						name: '获取特定类型模型',
+						name: 'Get Specific Type Models',
 						value: 'getModelsByType',
-						description: '获取特定类型的模型列表',
+						description: 'Get a list of models of specific types',
 					},
 					{
-						name: '获取采样器列表',
+						name: 'Get Sampler List',
 						value: 'getSamplers',
-						description: '获取可用的采样器列表',
+						description: 'Get a list of available samplers',
 					},
 					{
-						name: '获取调度器列表',
+						name: 'Get Scheduler List',
 						value: 'getSchedulers',
-						description: '获取可用的调度器列表',
+						description: 'Get a list of available schedulers',
 					},
 					{
-						name: '获取扩展列表',
+						name: 'Get Extension List',
 						value: 'getExtensions',
-						description: '获取已安装的扩展列表',
+						description: 'Get a list of installed extensions',
 					},
 					{
-						name: '获取嵌入向量列表',
+						name: 'Get Embedding List',
 						value: 'getEmbeddings',
-						description: '获取可用的嵌入向量列表',
+						description: 'Get a list of available embeddings',
 					},
 				],
 				default: 'getAllModels',
 				required: true,
-				description: '要执行的模型操作',
+				description: 'Model operation to execute',
 				displayOptions: {
 					show: {
 						operationCategory: ['models'],
 					},
 				},
 			},
-			// 获取特定类型模型参数
+			// Get specific type model parameters
 			{
-				displayName: '模型类型',
+				displayName: 'Model Type',
 				name: 'modelType',
 				type: 'options',
 				options: [
 					{
-						name: '检查点模型',
+						name: 'Checkpoint Models',
 						value: 'checkpoints',
-						description: '稳定扩散检查点模型',
+						description: 'Stable Diffusion checkpoint models',
 					},
 					{
 						name: 'VAE',
 						value: 'vae',
-						description: 'VAE模型',
+						description: 'VAE models',
 					},
 					{
 						name: 'LoRA',
 						value: 'loras',
-						description: 'LoRA模型',
+						description: 'LoRA models',
 					},
 					{
 						name: 'ControlNet',
 						value: 'controlnet',
-						description: 'ControlNet模型',
+						description: 'ControlNet models',
 					},
 					{
 						name: 'CLIP',
 						value: 'clip',
-						description: 'CLIP模型',
+						description: 'CLIP models',
 					},
 					{
 						name: 'CLIP Vision',
 						value: 'clip_vision',
-						description: 'CLIP Vision模型',
+						description: 'CLIP Vision models',
 					},
 					{
-						name: '扩散器',
+						name: 'Diffusers',
 						value: 'diffusers',
-						description: 'Diffusers模型',
+						description: 'Diffusers models',
 					},
 					{
-						name: '正则化图像',
+						name: 'Regularization Images',
 						value: 'regularization',
-						description: '正则化图像',
+						description: 'Regularization images',
 					},
 					{
-						name: '升频器',
+						name: 'Upscalers',
 						value: 'upscale_models',
-						description: '图像升频模型',
+						description: 'Image upscaling models',
 					},
 
 				],
 				default: 'checkpoints',
-				description: '要获取的模型类型',
+				description: 'Model type to get',
 				displayOptions: {
 					show: {
 						operationCategory: ['models'],
@@ -259,9 +259,9 @@ export class comfyui implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-				// 获取基本参数
+				// Get basic parameters
 				let serverUrl = this.getNodeParameter('serverUrl', i) as string;
-				// serverUrl 需要去掉末尾斜杠及以后的部分，用正则表达式匹配
+				// serverUrl needs to remove trailing slashes and everything after, use regex to match
 				serverUrl = serverUrl.replace(/\/+$/, '');
 
 
@@ -269,7 +269,7 @@ export class comfyui implements INodeType {
 				const manualHeaderKey = this.getNodeParameter('manualHeaderKey', i, '') as string;
 				const manualHeaderValue = this.getNodeParameter('manualHeaderValue', i, '') as string;
 
-				// 获取认证信息
+				// Get authentication information
 				let headerKey = 'Authorization';
 				let headerValue = '';
 				try {
@@ -279,14 +279,14 @@ export class comfyui implements INodeType {
 						headerValue = credentials.value || '';
 					}
 				} catch (error) {
-					// 凭证是可选的，所以可以继续
+					// Credentials are optional, so we can continue
 				}
 
-				// 使用手动指定的header覆盖凭证
+				// Use manually specified header to override credentials
 				const headerKeyToUse = manualHeaderKey.trim() !== '' ? manualHeaderKey.trim() : headerKey.trim();
 				const headerValueToUse = manualHeaderValue.trim() !== '' ? manualHeaderValue.trim() : headerValue.trim();
 
-				// 准备请求头
+				// Prepare request headers
 				const headers: Record<string, string> = {
 					'Content-Type': 'application/json',
 				};
@@ -295,25 +295,25 @@ export class comfyui implements INodeType {
 					headers[headerKeyToUse] = headerValueToUse;
 				}
 
-				// 移除可能导致问题的Content-Type头，某些GET请求不需要
+				// Remove Content-Type header that might cause issues, some GET requests don't need it
 				const getHeaders = { ...headers };
 				delete getHeaders['Content-Type'];
 
-				// 根据操作类别执行不同的逻辑
+				// Execute different logic based on operation category
 				let responseData;
 
 				if (operationCategory === 'queue') {
-					// 队列管理操作
+					// Queue management operations
 					const queueOperation = this.getNodeParameter('queueOperation', i) as string;
 					if (queueOperation === 'getRecentHistory') {
-						// 获取最近5条历史记录
+						// Get recent 5 history records
 						try {
 							responseData = (await axios.get(
 								`${serverUrl}/history?max_items=5`,
 								{ headers: getHeaders, timeout: 10000 }
 							)).data;
 						} catch (error) {
-							// 如果/history失败，尝试/api/history
+							// If /history fails, try /api/history
 							responseData = (await axios.get(
 								`${serverUrl}/api/history`,
 								{ headers: getHeaders, timeout: 10000 }
@@ -322,21 +322,21 @@ export class comfyui implements INodeType {
 					}
 
 					if (queueOperation === 'getQueueStatus') {
-						// 获取队列状态
+						// Get queue status
 						try {
 							responseData = (await axios.get(
 								`${serverUrl}/queue`,
 								{ headers: getHeaders, timeout: 10000 }
 							)).data;
 						} catch (error) {
-							// 如果/queue失败，尝试/api/queue
+							// If /queue fails, try /api/queue
 							responseData = (await axios.get(
 								`${serverUrl}/api/queue`,
 								{ headers: getHeaders, timeout: 10000 }
 							)).data;
 						}
 					} else if (queueOperation === 'clearQueue') {
-						// 清空队列
+						// Clear queue
 						try {
 							await axios.post(
 								`${serverUrl}/queue`,
@@ -344,16 +344,16 @@ export class comfyui implements INodeType {
 								{ headers, timeout: 10000 }
 							);
 						} catch (error) {
-							// 如果/queue失败，尝试/api/queue
+							// If /queue fails, try /api/queue
 							await axios.post(
 								`${serverUrl}/api/queue`,
 								{ clear: true },
 								{ headers, timeout: 10000 }
 							);
 						}
-						responseData = { success: true, message: '队列已清空' };
+						responseData = { success: true, message: 'Queue cleared' };
 					} else if (queueOperation === 'interruptExecution') {
-						// 中断当前执行
+						// Interrupt current execution
 						try {
 							await axios.post(
 								`${serverUrl}/interrupt`,
@@ -361,16 +361,16 @@ export class comfyui implements INodeType {
 								{ headers, timeout: 10000 }
 							);
 						} catch (error) {
-							// 如果/interrupt失败，尝试/api/interrupt
+							// If /interrupt fails, try /api/interrupt
 							await axios.post(
 								`${serverUrl}/api/interrupt`,
 								{},
 								{ headers, timeout: 10000 }
 							);
 						}
-						responseData = { success: true, message: '已中断当前执行' };
+						responseData = { success: true, message: 'Current execution interrupted' };
 					} else if (queueOperation === 'clearHistory') {
-						// 清空历史记录
+						// Clear history
 						try {
 							await axios.post(
 								`${serverUrl}/history`,
@@ -378,16 +378,16 @@ export class comfyui implements INodeType {
 								{ headers, timeout: 10000 }
 							);
 						} catch (error) {
-							// 如果/history失败，尝试/api/history
+							// If /history fails, try /api/history
 							await axios.post(
 								`${serverUrl}/api/history`,
 								{ clear: true },
 								{ headers, timeout: 10000 }
 							);
 						}
-						responseData = { success: true, message: '历史记录已清空' };
+						responseData = { success: true, message: 'History cleared' };
 					} else if (queueOperation === 'deleteHistoryItem') {
-						// 删除历史记录项
+						// Delete history item
 						const promptId = this.getNodeParameter('promptId', i) as string;
 						try {
 							await axios.post(
@@ -396,23 +396,23 @@ export class comfyui implements INodeType {
 								{ headers, timeout: 10000 }
 							);
 						} catch (error) {
-							// 如果/history失败，尝试/api/history
+							// If /history fails, try /api/history
 							await axios.post(
 								`${serverUrl}/api/history`,
 								{ delete: [promptId] },
 								{ headers, timeout: 10000 }
 							);
 						}
-						responseData = { success: true, message: `历史记录项 ${promptId} 已删除` };
+						responseData = { success: true, message: `History item ${promptId} deleted` };
 					} else if (queueOperation === 'getSystemInfo') {
-						// 获取系统信息
+						// Get system information
 						try {
 							responseData = (await axios.get(
 								`${serverUrl}/system_stats`,
 								{ headers: getHeaders, timeout: 10000 }
 							)).data;
 						} catch (error) {
-							// 如果/system_stats失败，尝试/api/system_stats
+							// If /system_stats fails, try /api/system_stats
 							responseData = (await axios.get(
 								`${serverUrl}/api/system_stats`,
 								{ headers: getHeaders, timeout: 10000 }
@@ -420,11 +420,11 @@ export class comfyui implements INodeType {
 						}
 					}
 				} else if (operationCategory === 'models') {
-					// 模型管理操作
+					// Model management operations
 					const modelsOperation = this.getNodeParameter('modelsOperation', i) as string;
 
 					if (modelsOperation === 'getAllModels') {
-						// 获取所有模型
+						// Get all models
 						const response = await axios.get(
 							`${serverUrl}/object_info`,
 							{ headers: getHeaders }
@@ -432,42 +432,42 @@ export class comfyui implements INodeType {
 
 						responseData = response.data;
 					} else if (modelsOperation === 'getModelsByType') {
-						// 获取特定类型模型
+						// Get specific type models
 						const modelType = this.getNodeParameter('modelType', i) as string;
 
-						// 获取并过滤特定类型的模型
+						// Get and filter specific type models
 						const allModels = (await axios.get(
 							`${serverUrl}/object_info`,
 							{ headers: getHeaders }
 						)).data;
 						const filteredModels: Record<string, any> = {};
 
-						// 检查模型类型是否存在
+						// Check if model type exists
 						if (allModels[modelType]) {
 							filteredModels[modelType] = allModels[modelType];
 						}
 
 						responseData = filteredModels;
 					} else if (modelsOperation === 'getSamplers') {
-						// 获取采样器列表
+						// Get sampler list
 						responseData = (await axios.get(
 							`${serverUrl}/samplers`,
 							{ headers: getHeaders }
 						)).data;
 					} else if (modelsOperation === 'getSchedulers') {
-						// 获取调度器列表
+						// Get scheduler list
 						responseData = (await axios.get(
 							`${serverUrl}/schedulers`,
 							{ headers: getHeaders }
 						)).data;
 					} else if (modelsOperation === 'getExtensions') {
-						// 获取扩展列表
+						// Get extension list
 						responseData = (await axios.get(
 							`${serverUrl}/extensions`,
 							{ headers: getHeaders }
 						)).data;
 					} else if (modelsOperation === 'getEmbeddings') {
-						// 获取嵌入向量列表
+						// Get embedding list
 						responseData = (await axios.get(
 							`${serverUrl}/embeddings`,
 							{ headers: getHeaders }
@@ -475,7 +475,7 @@ export class comfyui implements INodeType {
 					}
 				}
 
-				// 返回结果
+				// Return results
 				returnData.push({
 					json: responseData,
 				});
@@ -495,11 +495,11 @@ export class comfyui implements INodeType {
 						json: errorInfo,
 					});
 				} else {
-					// 创建更详细的错误信息
+					// Create more detailed error information
 					const detailedError = new Error(
-						`ComfyUI API 错误 (${error.response?.status}): ${error.message}\n` +
+						`ComfyUI API Error (${error.response?.status}): ${error.message}\n` +
 						`URL: ${error.config?.url}\n` +
-						`建议: ${suggestion}`
+						`Suggestion: ${suggestion}`
 					);
 					throw detailedError;
 				}
@@ -510,45 +510,45 @@ export class comfyui implements INodeType {
 	}
 
 	/**
-	 * 根据错误类型提供解决建议
+	 * Provide solution suggestions based on error type
 	 */
 	private static getErrorSuggestion(error: any): string {
 		const status = error.response?.status;
 
 		switch (status) {
 			case 403:
-				return '403 Forbidden - 检查以下项目:\n' +
-					'1. ComfyUI服务器是否正确启动\n' +
-					'2. 服务器URL是否正确 (通常是 http://127.0.0.1:8188)\n' +
-					'3. 检查ComfyUI启动参数，确保没有启用访问限制\n' +
-					'4. 如果使用了--listen参数，确保允许外部访问\n' +
-					'5. 检查防火墙设置';
+				return '403 Forbidden - Check the following items:\n' +
+					'1. Is the ComfyUI server running correctly\n' +
+					'2. Is the server URL correct (usually http://127.0.0.1:8188)\n' +
+					'3. Check ComfyUI startup parameters to ensure access restrictions are not enabled\n' +
+					'4. If using --listen parameter, ensure external access is allowed\n' +
+					'5. Check firewall settings';
 			case 404:
-				return '404 Not Found - API端点不存在，可能的原因:\n' +
-					'1. ComfyUI版本过旧，不支持此API\n' +
-					'2. URL路径错误\n' +
-					'3. 服务器配置问题';
+				return '404 Not Found - API endpoint does not exist, possible reasons:\n' +
+					'1. ComfyUI version is too old and does not support this API\n' +
+					'2. Incorrect URL path\n' +
+					'3. Server configuration issues';
 			case 500:
-				return '500 Internal Server Error - ComfyUI服务器内部错误:\n' +
-					'1. 检查ComfyUI服务器日志\n' +
-					'2. 重启ComfyUI服务器\n' +
-					'3. 检查服务器资源使用情况';
+				return '500 Internal Server Error - ComfyUI server internal error:\n' +
+					'1. Check ComfyUI server logs\n' +
+					'2. Restart ComfyUI server\n' +
+					'3. Check server resource usage';
 			case undefined:
 				if (error.code === 'ECONNREFUSED') {
-					return '连接被拒绝 - ComfyUI服务器未运行或无法访问:\n' +
-						'1. 确保ComfyUI服务器正在运行\n' +
-						'2. 检查服务器地址和端口是否正确\n' +
-						'3. 检查网络连接';
+					return 'Connection refused - ComfyUI server is not running or not accessible:\n' +
+						'1. Ensure ComfyUI server is running\n' +
+						'2. Check if server address and port are correct\n' +
+						'3. Check network connection';
 				}
 				if (error.code === 'ETIMEDOUT') {
-					return '请求超时 - 服务器响应缓慢:\n' +
-						'1. 检查网络连接\n' +
-						'2. 增加超时时间\n' +
-						'3. 检查服务器负载';
+					return 'Request timeout - Server response is slow:\n' +
+						'1. Check network connection\n' +
+						'2. Increase timeout time\n' +
+						'3. Check server load';
 				}
-				return `网络错误 (${error.code}): ${error.message}`;
+				return `Network error (${error.code}): ${error.message}`;
 			default:
-				return `HTTP ${status} 错误: ${error.response?.statusText || error.message}`;
+				return `HTTP ${status} error: ${error.response?.statusText || error.message}`;
 		}
 	}
 }

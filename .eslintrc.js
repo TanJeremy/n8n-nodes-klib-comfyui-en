@@ -29,7 +29,7 @@ module.exports = {
       'error',
       {
         'selector': 'Comment',
-        'message': '请使用中文注释，除非是代码示例或特定术语',
+        'message': 'Please use English comments, unless it is a code example or specific terminology',
       },
     ],
   },
